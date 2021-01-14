@@ -166,7 +166,7 @@ exports.editProfileUser = async (req, res) => {
       );
     }
     await Profile.update(
-      { ...req.body, avatar: req.file.filename },
+      { ...req.body, avatar: req.file.path },
       {
         where: { userID },
       }

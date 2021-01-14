@@ -2,15 +2,33 @@ const multer = require("multer");
 const path = require("path");
 
 exports.uploadImage = (field) => {
-  const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "uploads");
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + "-" + file.originalname);
+  // const storage = multer.diskStorage({
+  //   destination: function (req, file, cb) {
+  //     cb(null, "uploads");
+  //   },
+  //   filename: function (req, file, cb) {
+  //     cb(null, Date.now() + "-" + file.originalname);
+  //   },
+  // });
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+  });
+  const storage = new CloudinaryStorage({
+    // cloudinary: cloudinary,
+    // folder: "waysbeans",
+    // allowedFormats: ["jpg", "png"],
+    cloudinary: cloudinary,
+    params: async (req, file) => {
+      // async code using `req` and `file`
+      // ...
+      return {
+        folder: "waysgallery",
+        public_id: `${Date.now()} - ${file.originalname}`,
+      };
     },
   });
-
   const imageFilter = function (req, file, cb) {
     if (
       !file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|webp|GIF)$/)

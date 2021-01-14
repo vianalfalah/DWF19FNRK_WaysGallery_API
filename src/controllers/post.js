@@ -110,7 +110,7 @@ exports.addPost = async (req, res) => {
     });
 
     const { error } = schema.validate(
-      { ...req.body, images: req.files },
+      { ...req.body, images: file.path },
       {
         abortEarly: false,
       }
@@ -130,7 +130,7 @@ exports.addPost = async (req, res) => {
     const post = await Post.create({
       title,
       description,
-      images: req.files,
+      images: file.path,
       userID,
     });
 
@@ -139,7 +139,7 @@ exports.addPost = async (req, res) => {
         file.map(async (photo) => {
           await Photo.create({
             postID: post.id,
-            images: photo.filename,
+            images: photo.path,
           });
         })
       );
