@@ -2,7 +2,6 @@ const { User, Profile, Post, Art, Photos } = require("../../models");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const jwtKey = process.env.JWT_KEY;
 
 exports.register = async (req, res) => {
   try {
