@@ -5,7 +5,6 @@ const Joi = require("joi");
 exports.getPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt", "userID"] },
       order: [["createdAt", "DESC"]],
       include: [
         {
@@ -17,6 +16,13 @@ exports.getPosts = async (req, res) => {
           model: User,
           as: "createdBy",
           attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+          include: {
+            model: Profile,
+            as: "profile",
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "userID", "id"],
+            },
+          },
         },
       ],
     });
