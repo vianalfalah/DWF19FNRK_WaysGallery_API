@@ -24,7 +24,7 @@ exports.getUser = async (req, res) => {
         {
           model: Post,
           as: "posts",
-
+          order: [["createdAt", "DESC"]],
           attributes: {
             exclude: ["createdAt", "updatedAt", "userID"],
           },
@@ -37,7 +37,7 @@ exports.getUser = async (req, res) => {
         {
           model: Art,
           as: "arts",
-
+          order: [["createdAt", "DESC"]],
           attributes: { exclude: ["createdAt", "updatedAt", "userID"] },
         },
       ],
