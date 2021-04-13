@@ -9,6 +9,7 @@ exports.getUser = async (req, res) => {
     // const latestArt = await Art.max("id", { where: { userID: id } });
     const user = await User.findOne({
       where: { id },
+      order: [["createdAt", "DESC"]],
       attributes: {
         exclude: ["createdAt", "updatedAt", "password"],
       },
@@ -26,7 +27,7 @@ exports.getUser = async (req, res) => {
           as: "posts",
           order: [["createdAt", "DESC"]],
           attributes: {
-            exclude: ["createdAt", "updatedAt", "userID"],
+            exclude: ["updatedAt", "userID"],
           },
           include: {
             model: Photo,
@@ -38,7 +39,7 @@ exports.getUser = async (req, res) => {
           model: Art,
           as: "arts",
           order: [["createdAt", "DESC"]],
-          attributes: { exclude: ["createdAt", "updatedAt", "userID"] },
+          attributes: { exclude: ["updatedAt", "userID"] },
         },
       ],
     });
@@ -71,6 +72,7 @@ exports.getUserProfileById = async (req, res) => {
     const { id } = req.params;
     const user = await User.findOne({
       where: { id },
+      order: [["createdAt", "DESC"]],
       attributes: {
         exclude: ["createdAt", "updatedAt", "password"],
       },
@@ -86,13 +88,14 @@ exports.getUserProfileById = async (req, res) => {
         {
           model: Post,
           as: "posts",
+          order: [["createdAt", "DESC"]],
           attributes: {
             exclude: ["createdAt", "updatedAt", "userID"],
-            order: [["createdAt", "DESC"]],
           },
           include: {
             model: Photo,
             as: "photos",
+            order: [["createdAt", "DESC"]],
             attributes: {
               exclude: ["createdAt", "updatedAt"],
             },
