@@ -25,9 +25,9 @@ exports.getUser = async (req, res) => {
           model: Post,
           as: "posts",
 
+          order: [["createdAt", "DESC"]],
           attributes: {
             exclude: ["updatedAt", "userID"],
-            order: [["createdAt", "DESC"]],
           },
           include: {
             model: Photo,
@@ -38,8 +38,8 @@ exports.getUser = async (req, res) => {
         {
           model: Art,
           as: "arts",
+          order: [["createdAt", "DESC"]],
           attributes: {
-            order: [["createdAt", "DESC"]],
             exclude: ["updatedAt", "userID"],
           },
         },
@@ -92,12 +92,11 @@ exports.getUserProfileById = async (req, res) => {
           order: [["createdAt", "DESC"]],
           attributes: {
             exclude: ["createdAt", "updatedAt", "userID"],
-            order: [["createdAt", "DESC"]],
           },
           include: {
             model: Photo,
             as: "photos",
-            order: [["createdAt", "DESC"]],
+
             attributes: {
               exclude: ["createdAt", "updatedAt"],
             },
@@ -106,9 +105,9 @@ exports.getUserProfileById = async (req, res) => {
         {
           model: Art,
           as: "arts",
+          order: [["createdAt", "DESC"]],
           attributes: {
             exclude: ["createdAt", "updatedAt", "userID"],
-            order: [["createdAt", "DESC"]],
           },
         },
       ],
