@@ -46,6 +46,7 @@ exports.register = async (req, res) => {
     await Profile.create({
       userID: user.id,
       avatar: "default",
+      sampul: "default",
       greeting: "Hi, Nice To Meet You !!!",
     });
 

@@ -11,6 +11,9 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
       },
+      sampul: {
+        type: Sequelize.STRING,
+      },
       greeting: {
         type: Sequelize.STRING,
       },
